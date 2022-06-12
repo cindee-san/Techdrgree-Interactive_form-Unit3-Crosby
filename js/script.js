@@ -29,8 +29,6 @@ shirtDesign.addEventListener('change', (e) =>{
     var userSelection = e.target.value;
     var designTheme = shirtColorChoices[i].getAttribute('data-theme');
 
-      console.log (designTheme);
-
       if(userSelection === designTheme) {
         shirtColorChoices[i].hidden = false;
         shirtColorChoices[i].setAttribute = ('selected', 'selected');
