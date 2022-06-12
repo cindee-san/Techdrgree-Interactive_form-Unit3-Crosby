@@ -13,3 +13,30 @@ userTitle.addEventListener('change', (e) => {
         userOtherTitle.style.display = 'none'
     }
 });
+
+//Create variables to reference the "Design" <select> element and the "Color" <select> element. 
+
+var shirtDesign = document.getElementById('design');
+var shirtColor = document.getElementById('color')
+var shirtColorChoices = document.getElementById('color').children;
+
+shirtColor.disabled = true;
+
+shirtDesign.addEventListener('change', (e) =>{
+  shirtColor.disabled = false;
+
+  for(let i = 0; i < shirtColorChoices.length; i++){
+    var userSelection = e.target.value;
+    var designTheme = shirtColorChoices[i].getAttribute('data-theme');
+
+      console.log (designTheme);
+
+      if(userSelection === designTheme) {
+        shirtColorChoices[i].hidden = false;
+        shirtColorChoices[i].setAttribute = ('selected', 'selected');
+      } else {
+        shirtColorChoices[i].hidden = true;
+        shirtColorChoices[i].removeAttribute('selected');
+      }
+  }
+});
