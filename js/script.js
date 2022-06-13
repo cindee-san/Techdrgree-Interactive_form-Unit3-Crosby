@@ -53,6 +53,35 @@ activitiesForm.addEventListener('change', (e) =>{
   } else {
     activitiesTotalCost -= activityCost;
   }
-  activitiesTotalCostElement.textContent= `Total: ${activitiesTotalCost}`;
+  activitiesTotalCostElement.textContent= `Total: $${activitiesTotalCost}`;
 });
+
+//The preferred or most common payment method option should be selected and the corresponding payment form sections should be displayed by default, while the other payment form sections should be hidden.
+
+const payingWith = document.getElementById('payment');
+const payCreditCard = document.getElementById('credit-card');
+const payPayPal = document.getElementById('paypal');
+const payBitcoin = document.getElementById('bitcoin');
+
+payPayPal.hidden = true;
+payBitcoin.hidden = true;
+
+const creditCardOption = payingWith.children[1];
+creditCardOption.setAttribute('credit-card', 'selected');
+
+payingWith.addEventListener('change', (e) => {
+  
+  if(e.target.value === 'paypal'){
+    payPayPal.style.display = 'block';
+    payCreditCard.style.display = 'none';
+  } else if(e.target.value === 'bitcoin'){
+    payBitcoin.style.display = 'block';
+    payPayPal.style.display = 'none';
+    payCreditCard.style.display = 'none';
+  } else {
+    payBitcoin.style.display = 'none';
+    payPayPal.style.display = 'none';
+    payCreditCard.style.display = 'block';
+  }
+  });
 
