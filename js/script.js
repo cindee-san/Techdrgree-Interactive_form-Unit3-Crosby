@@ -38,3 +38,21 @@ shirtDesign.addEventListener('change', (e) =>{
       }
   }
 });
+
+//Atendees can register for activities and a running total is kept at the bottom of the fieldset
+const activitiesForm = document.getElementById('activities');
+const activitiesTotalCostElement = document.getElementById('activities-cost');
+let activitiesTotalCost = 0;
+
+activitiesForm.addEventListener('change', (e) =>{
+  let activityCost = e.target.getAttribute('data-cost');
+  activityCost = +activityCost
+  
+  if(e.target.checked){
+    activitiesTotalCost += activityCost;
+  } else {
+    activitiesTotalCost -= activityCost;
+  }
+  activitiesTotalCostElement.textContent= `Total: ${activitiesTotalCost}`;
+});
+
