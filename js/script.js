@@ -72,12 +72,15 @@ creditCardOption.setAttribute('credit-card', 'selected');
 payingWith.addEventListener('change', (e) => {
   
   if(e.target.value === 'paypal'){
+    payBitcoin.style.display = 'none';
     payPayPal.style.display = 'block';
     payCreditCard.style.display = 'none';
+
   } else if(e.target.value === 'bitcoin'){
     payBitcoin.style.display = 'block';
     payPayPal.style.display = 'none';
     payCreditCard.style.display = 'none';
+
   } else {
     payBitcoin.style.display = 'none';
     payPayPal.style.display = 'none';
