@@ -31,10 +31,10 @@ shirtDesign.addEventListener('change', (e) =>{
 
       if(userSelection === designTheme) {
         shirtColorChoices[i].hidden = false;
-        shirtColorChoices[i].setAttribute = ('selected', 'selected');
+        shirtColorChoices[i].selected = true;
       } else {
         shirtColorChoices[i].hidden = true;
-        shirtColorChoices[i].removeAttribute('selected');
+        shirtColorChoices[i].selected = false;
       }
   }
 });
