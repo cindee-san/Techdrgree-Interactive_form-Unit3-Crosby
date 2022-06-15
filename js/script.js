@@ -1,4 +1,4 @@
-const userName = document.querySelector('#name');
+let userName = document.querySelector('#name');
 const userTitle = document.querySelector('#title');
 const userOtherTitle = document.querySelector('#other-job-role');
 
@@ -69,6 +69,7 @@ payBitcoin.hidden = true;
 const creditCardOption = payingWith.children[1];
 creditCardOption.setAttribute('credit-card', 'selected');
 
+// Event listener for payment method change. Default is Credit Card, but other payment options are hidden if not selected, and show if selected.
 payingWith.addEventListener('change', (e) => {
   
   if(e.target.value === 'paypal'){
@@ -88,3 +89,74 @@ payingWith.addEventListener('change', (e) => {
   }
   });
 
+let userEmail = document.getElementById('email');
+let cardNumber = document.getElementById('cc-num');
+let zipCode = document.getElementById('zip');
+let cvv = document.getElementById('cvv');
+const form = document.querySelector('form');
+
+//helper function for Name Validation
+const nameValidator = () => {
+  userName = userName.value;
+  const userNameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(userName);
+  console.log(`This user name ${userName} is ${userNameIsValid}`);
+
+  return userNameIsValid;
+}
+
+//helper function for Email Validation
+const emailValidator = () => {
+  userEmail = userEmail.value;
+  const userEmailIsValid = /^[^@]+@[^@.]+\.[a-z]+$/i.test(userEmail);
+  console.log(`This user email ${userEmail} is ${userEmailIsValid}`);
+
+  return userEmailIsValid;
+}
+// console.log(cardNumber.value);
+// helper function for visa Credit Card Number, begins with 4 and takes 13 or 16 digits, from https://www.vrsofttech.com/javascript/how-to-validate-debit-or-credit-card-number-using-javascript-regex
+const cardNumberValidator = () => {
+  cardNumber = cardNumber.value;
+  const cardNumberIsValid = /^(?:4[0-9]{12})(?:[0-9]{3})?$/.test(cardNumber);
+  console.log(`This credit card ${cardNumber} is ${cardNumberIsValid}`);
+
+  return cardNumberIsValid;
+}
+
+//helper function for 5 or 9 digit zip code, from https://stackoverflow.com/questions/160550/zip-code-us-postal-code-validation
+const zipCodeValidator = () => {
+  zipCode = zipCode.value;
+  const zipCodeIsValid = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipCode);
+  console.log(`This zip code ${zipCode} is ${zipCodeIsValid}`);
+
+  return zipCodeIsValid;
+}
+
+//helper function for three digit cvv
+const cvvValidator = () => {
+  cvv = cvv.value;
+  const cvvIsValid = /(^\d{3}$)/.test(cvv);
+  console.log(`This CVV ${cvv} is ${cvvIsValid}`);
+
+  return cvvIsValid;
+}
+
+//submit handler for payment info.
+form.addEventListener('submit', (e) => {
+
+  if(!nameValidator()){
+    e.preventDefault(); 
+  }
+  if(!emailValidator()){
+    e.preventDefault(); 
+  }
+  if(!cardNumberValidator()){
+    e.preventDefault(); 
+  }
+  if(!zipCodeValidator()){
+    e.preventDefault(); 
+  }
+  if(!cvvValidator()){
+    e.preventDefault(); 
+  }
+
+});
