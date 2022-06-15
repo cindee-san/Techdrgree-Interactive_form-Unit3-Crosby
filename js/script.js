@@ -1,3 +1,4 @@
+//variables used throughout code
 let userName = document.querySelector('#name');
 const userTitle = document.querySelector('#title');
 const userOtherTitle = document.querySelector('#other-job-role');
@@ -192,7 +193,7 @@ const cvvValidator = () => {
 
 //functions to check if the element passes or fails validation
 function validationPass(element){
-  element.parentElement.className = 'valid';
+  element.parentElement.classList.add = 'valid';
   element.parentElement.classList.remove = 'not-valid';
   element.parentElement.lastElementChild.style.display = 'none';
 
@@ -200,7 +201,7 @@ function validationPass(element){
 }
 
 function validationFail(element){
-   element.parentElement.className = 'not-valid';
+   element.parentElement.classList.add = 'not-valid';
    element.parentElement.classList.remove = 'valid';
    element.parentElement.lastElementChild.style.display = 'block';
   
