@@ -1,7 +1,13 @@
 let userName = document.querySelector('#name');
 const userTitle = document.querySelector('#title');
 const userOtherTitle = document.querySelector('#other-job-role');
+let userEmail = document.getElementById('email');
+let cardNumber = document.getElementById('cc-num');
+let zipCode = document.getElementById('zip');
+let cvv = document.getElementById('cvv');
+const form = document.querySelector('form');
 
+// focus is on Name field when page is loaded
 userName.focus();
 userOtherTitle.style.display = 'none';
 
@@ -89,11 +95,7 @@ payingWith.addEventListener('change', (e) => {
   }
   });
 
-let userEmail = document.getElementById('email');
-let cardNumber = document.getElementById('cc-num');
-let zipCode = document.getElementById('zip');
-let cvv = document.getElementById('cvv');
-const form = document.querySelector('form');
+
 
 //helper function for Name Validation
 const nameValidator = () => {
@@ -160,3 +162,18 @@ form.addEventListener('submit', (e) => {
   }
 
 });
+
+//Accessibility improvements for Register for Activities section
+let activitiesBox = document.getElementById('activities-box');
+let activitiesCheckboxes = activitiesBox.querySelectorAll('input');
+
+for(i = 0; i < activitiesCheckboxes.length; i++){
+  activitiesCheckboxes[i].addEventListener('focus', (e) => {
+    activitiesCheckboxes[i].parentElement.classList.add = 'focus';
+  })
+  activitiesCheckboxes[i].addEventListener('blur', (e) => {
+    activitiesCheckboxes[i].parentElement.classList.remove = 'focus';
+  })
+}
+
+
