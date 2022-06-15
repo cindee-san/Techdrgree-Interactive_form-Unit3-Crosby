@@ -164,16 +164,18 @@ form.addEventListener('submit', (e) => {
 });
 
 //Accessibility improvements for Register for Activities section
-let activitiesBox = document.getElementById('activities-box');
-let activitiesCheckboxes = activitiesBox.querySelectorAll('input');
+// let activitiesBox = document.getElementById('activities-box');
+// let activitiesCheckboxes = activitiesBox.querySelectorAll('input');
 
-for(i = 0; i < activitiesCheckboxes.length; i++){
-  activitiesCheckboxes[i].addEventListener('focus', (e) => {
-    activitiesCheckboxes[i].parentElement.classList.add = 'focus';
-  })
-  activitiesCheckboxes[i].addEventListener('blur', (e) => {
-    activitiesCheckboxes[i].parentElement.classList.remove = 'focus';
-  })
-}
+// for(i = 0; i < activitiesCheckboxes.length; i++){
+//   activitiesCheckboxes[i].addEventListener('focus', (e) => {
+//     let checkedBox = e.target;
+//     checkedBox = activitiesCheckboxes[i].parentElement.classList.add = 'focus';
+//   })
+//   activitiesCheckboxes[i].addEventListener('blur', (e) => {
+//     let uncheckedBox = e.target;
+//     uncheckedBox = activitiesCheckboxes[i].parentElement.classList.remove = 'focus';
+//   })
+// }
 
 
