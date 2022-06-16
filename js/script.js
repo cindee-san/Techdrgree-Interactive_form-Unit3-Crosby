@@ -141,7 +141,7 @@ const activityValidator = () =>{
   return activityIsValid;
 
 }
-// helper function for visa Credit Card Number, begins with 4 and takes 13 or 16 digits, from https://www.vrsofttech.com/javascript/how-to-validate-debit-or-credit-card-number-using-javascript-regex
+// helper function for Credit Card Number, takes 13 or 16 digits, from https://www.regular-expressions.info/creditcard.html#:~:text=The%20regex%20%5Cb%5Cd%7B,of%2013%20to%2016%20digits.
 const cardNumberValidator = () => {
   let cardNumberValue = cardNumber.value;
   let cardNumberIsValid = /^\b\d{13,16}\b$/.test(cardNumberValue);
