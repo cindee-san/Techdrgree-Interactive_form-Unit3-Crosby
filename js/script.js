@@ -146,7 +146,7 @@ const activityValidator = () =>{
 // helper function for visa Credit Card Number, begins with 4 and takes 13 or 16 digits, from https://www.vrsofttech.com/javascript/how-to-validate-debit-or-credit-card-number-using-javascript-regex
 const cardNumberValidator = () => {
   let cardNumberValue = cardNumber.value;
-  let cardNumberIsValid = /^(?:4[0-9]{12})(?:[0-9]{3})?$/.test(cardNumberValue);
+  let cardNumberIsValid = /^(?:[0-9]{13})?(?:[0-9]{3})?$/.test(cardNumberValue);
   console.log(`This credit card ${cardNumberValue} is ${cardNumberIsValid}`);
 
   //conditional to pass this element as an argument in 'validation pass' or 'validation fail'
@@ -193,7 +193,7 @@ const cvvValidator = () => {
 
 //functions to check if the element passes or fails validation
 function validationPass(element){
-  element.parentElement.classList.add = 'valid';
+  element.parentElement.classList.add('valid');
   element.parentElement.classList.remove = 'not-valid';
   element.parentElement.lastElementChild.style.display = 'none';
 
@@ -201,7 +201,7 @@ function validationPass(element){
 }
 
 function validationFail(element){
-   element.parentElement.classList.add = 'not-valid';
+   element.parentElement.classList.add('not-valid');
    element.parentElement.classList.remove = 'valid';
    element.parentElement.lastElementChild.style.display = 'block';
   
