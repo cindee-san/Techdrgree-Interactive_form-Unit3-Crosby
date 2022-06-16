@@ -146,7 +146,7 @@ const activityValidator = () =>{
 // helper function for visa Credit Card Number, begins with 4 and takes 13 or 16 digits, from https://www.vrsofttech.com/javascript/how-to-validate-debit-or-credit-card-number-using-javascript-regex
 const cardNumberValidator = () => {
   let cardNumberValue = cardNumber.value;
-  let cardNumberIsValid = /^(?:[0-9]{13})?(?:[0-9]{3})?$/.test(cardNumberValue);
+  let cardNumberIsValid = /^\b\d{13,16}\b$/.test(cardNumberValue);
   console.log(`This credit card ${cardNumberValue} is ${cardNumberIsValid}`);
 
   //conditional to pass this element as an argument in 'validation pass' or 'validation fail'
@@ -178,7 +178,6 @@ const zipCodeValidator = () => {
 const cvvValidator = () => {
   let cvvValue = cvv.value;
   let cvvIsValid = /(^\d{3}$)/.test(cvvValue);
-  console.log(`This CVV ${cvvValue} is ${cvvIsValid}`);
 
   //conditional to pass this element as an argument in 'validation pass' or 'validation fail'
   if(cvvIsValid ===true){
