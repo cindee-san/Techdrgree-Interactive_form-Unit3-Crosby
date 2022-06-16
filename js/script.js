@@ -100,7 +100,6 @@ payingWith.addEventListener('change', (e) => {
 const nameValidator = () => {
   let userNameValue = userName.value;
   let userNameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(userNameValue);
-  console.log(`This user name ${userNameValue} is ${userNameIsValid}`);
 
   //conditional to pass this element as an argument in 'validation pass' or 'validation fail'
   if(userNameIsValid ===true){
@@ -116,7 +115,6 @@ const nameValidator = () => {
 const emailValidator = () => {
   let userEmailValue = userEmail.value;
   let userEmailIsValid = /^[^@]+@[^@.]+\.[a-z]+$/i.test(userEmailValue);
-  console.log(`This user email ${userEmailValue} is ${userEmailIsValid}`);
 
     //conditional to pass this element as an argument in 'validation pass' or 'validation fail'
     if(userEmailIsValid ===true){
@@ -147,7 +145,6 @@ const activityValidator = () =>{
 const cardNumberValidator = () => {
   let cardNumberValue = cardNumber.value;
   let cardNumberIsValid = /^\b\d{13,16}\b$/.test(cardNumberValue);
-  console.log(`This credit card ${cardNumberValue} is ${cardNumberIsValid}`);
 
   //conditional to pass this element as an argument in 'validation pass' or 'validation fail'
   if(cardNumberIsValid ===true){
