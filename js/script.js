@@ -63,6 +63,13 @@ activitiesForm.addEventListener('change', (e) =>{
   } else {
     activitiesTotalCost -= chosenActivity;
   }
+  if (!activitiesTotalCost > 0) {
+    activitiesForm.className = 'activities not-valid';
+    activitiesForm.lastElementChild.style.display = 'block';
+  } else {
+    activitiesForm.className = 'activities valid';
+    activitiesForm.lastElementChild.style.display = 'none';
+  }
   activitiesTotalCostElement.textContent= `Total: $${activitiesTotalCost}`;
 
 });
@@ -71,8 +78,9 @@ activitiesForm.addEventListener('change', (e) =>{
 payPayPal.hidden = true;
 payBitcoin.hidden = true;
 
-const creditCardOption = payingWith.children[1];
-creditCardOption.setAttribute('credit-card', 'selected');
+const creditCardOption = payingWith.children[1]
+creditCardOption.setAttribute('selected', true);
+let creditCardOptionValue = creditCardOption.value;
 
 // Event listener for payment method change. 
 payingWith.addEventListener('change', (e) => {
@@ -131,16 +139,18 @@ const emailValidator = () => {
 const activityValidator = () =>{
 //conditional to pass this element as an argument in 'validation pass' or 'validation fail'
   let activitiesBox= document.getElementById('activities-box');
-  let activityIsValid = activitiesTotalCost
+  let activityIsValid = activitiesTotalCost > 0;
 
-  if(activityIsValid > 0){
-    validationPass(activitiesBox);
+  if (!activitiesTotalCost > 0) {
+    activitiesForm.className = 'activities not-valid';
+    activitiesForm.lastElementChild.style.display = 'block';
   } else {
-    validationFail(activitiesBox);
+    activitiesForm.className = 'activities valid';
+    activitiesForm.lastElementChild.style.display = 'none';
   }
   return activityIsValid;
+ }
 
-}
 // helper function for Credit Card Number, takes 13 or 16 digits, from https://www.regular-expressions.info/creditcard.html#:~:text=The%20regex%20%5Cb%5Cd%7B,of%2013%20to%2016%20digits.
 const cardNumberValidator = () => {
   let cardNumberValue = cardNumber.value;
@@ -159,7 +169,6 @@ const cardNumberValidator = () => {
 const zipCodeValidator = () => {
   let zipCodeValue = zipCode.value;
   let zipCodeIsValid = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipCodeValue);
-  console.log(`This zip code ${zipCodeValue} is ${zipCodeIsValid}`);
 
   //conditional to pass this element as an argument in 'validation pass' or 'validation fail'
   if(zipCodeIsValid ===true){
@@ -189,20 +198,26 @@ const cvvValidator = () => {
 
 //functions to check if the element passes or fails validation
 function validationPass(element){
-  element.parentElement.classList.add('valid');
-  element.parentElement.classList.remove = 'not-valid';
+  element.parentElement.className = 'valid';
   element.parentElement.lastElementChild.style.display = 'none';
 
   return validationPass;
 }
 
 function validationFail(element){
-   element.parentElement.classList.add('not-valid');
-   element.parentElement.classList.remove = 'valid';
+   element.parentElement.className = 'not-valid';
    element.parentElement.lastElementChild.style.display = 'block';
   
   return validationFail;
 }
+
+//validates form after user returns
+userName.addEventListener('keyup', nameValidator);
+userEmail.addEventListener('keyup', emailValidator);
+cardNumber.addEventListener('keyup', cardNumberValidator);
+zipCode.addEventListener('keyup', zipCodeValidator);
+cvv.addEventListener('keyup', cvvValidator);
+
 
 //submit handler for entire form, stops the page from submitting if a field is not valid.
 form.addEventListener('submit', (e) => {
@@ -216,15 +231,26 @@ form.addEventListener('submit', (e) => {
   if(!activityValidator()){
     e.preventDefault();
   }
-  if(!cardNumberValidator()){
-    e.preventDefault(); 
+
+  for ( let i = 0; i < payingWith.length; i++){
+    let cardNumberValue = payingWith.children[i].getAttribute('value');
+    console.log(cardNumberValue);
+    // issue is with condition here
+    if (cardNumberValue === 'credit-card'){
+      if(!cardNumberValidator()){
+        e.preventDefault(); 
+      }
+      if(!zipCodeValidator()){
+        e.preventDefault(); 
+      }
+      if(!cvvValidator()){
+        e.preventDefault(); 
+      }
+    } else { 
+      console.log('validation pass');
+    }
   }
-  if(!zipCodeValidator()){
-    e.preventDefault(); 
-  }
-  if(!cvvValidator()){
-    e.preventDefault(); 
-  }
+  
 
 });
 
