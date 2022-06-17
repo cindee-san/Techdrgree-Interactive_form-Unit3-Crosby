@@ -231,26 +231,18 @@ form.addEventListener('submit', (e) => {
   if(!activityValidator()){
     e.preventDefault();
   }
-
-  for ( let i = 0; i < payingWith.length; i++){
-    let cardNumberValue = payingWith.children[i].getAttribute('value');
-    console.log(cardNumberValue);
-    // issue is with condition here
-    if (cardNumberValue === 'credit-card'){
-      if(!cardNumberValidator()){
-        e.preventDefault(); 
-      }
-      if(!zipCodeValidator()){
-        e.preventDefault(); 
-      }
-      if(!cvvValidator()){
-        e.preventDefault(); 
-      }
-    } else { 
-      console.log('validation pass');
-    }
-  }
   
+  if (payingWith.value === 'credit-card'){
 
-});
+    if(!cardNumberValidator()){
+      e.preventDefault(); 
+    }
+    if(!zipCodeValidator()){
+      e.preventDefault(); 
+    }
+    if(!cvvValidator()){
+      e.preventDefault(); 
+    }
+  } 
+  });
 
