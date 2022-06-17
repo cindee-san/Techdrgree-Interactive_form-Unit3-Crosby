@@ -1,25 +1,28 @@
-//variables used throughout code
+//variables for basic info section
 let userName = document.querySelector('#name');
 const userTitle = document.querySelector('#title');
 const userOtherTitle = document.querySelector('#other-job-role');
 let userEmail = document.getElementById('email');
-let cardNumber = document.getElementById('cc-num');
-let zipCode = document.getElementById('zip');
-let cvv = document.getElementById('cvv');
-const form = document.querySelector('form');
+//variables for Shirt design section
 var shirtDesign = document.getElementById('design');
 var shirtColor = document.getElementById('color')
 var shirtColorChoices = document.getElementById('color').children;
+//variables for payment section
+let cardNumber = document.getElementById('cc-num');
+let zipCode = document.getElementById('zip');
+let cvv = document.getElementById('cvv');
 const payingWith = document.getElementById('payment');
 const payCreditCard = document.getElementById('credit-card');
 const payPayPal = document.getElementById('paypal');
 const payBitcoin = document.getElementById('bitcoin');
+//form variable for submit handler
+const form = document.querySelector('form');
 
 // focus is on Name field when page is loaded
 userName.focus();
 userOtherTitle.style.display = 'none';
 
-//When a "change" is detected, use a conditional statement to check the value property of the element.
+//Event listener for entering a different job role
 userTitle.addEventListener('change', (e) => {
     if (e.target.value === 'other'){
       userOtherTitle.style.display = 'block';
@@ -29,7 +32,6 @@ userTitle.addEventListener('change', (e) => {
 });
 
 // event listener for user shirt design choice, presents the color options available for chosen design, hides color choices not available for design
-
 shirtColor.disabled = true;
 
 shirtDesign.addEventListener('change', (e) =>{
@@ -49,7 +51,8 @@ shirtDesign.addEventListener('change', (e) =>{
   }
 });
 
-//Atendees can register for activities and a running total is kept at the bottom of the fieldset
+//Attendees can register for activities and a running total is kept at the bottom of the fieldset
+//Activity validator for page submission built in
 const activitiesForm = document.getElementById('activities');
 const activitiesTotalCostElement = document.getElementById('activities-cost');
 let activitiesTotalCost = 0;
@@ -103,21 +106,20 @@ payingWith.addEventListener('change', (e) => {
   });
 
 
-
 //helper function for Name Validation
 const nameValidator = () => {
   let userNameValue = userName.value;
   let userNameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(userNameValue);
 
-  //conditional to pass this element as an argument in 'validation pass' or 'validation fail'
-  if(userNameIsValid ===true){
-    validationPass(userName);
-  } else {
-    validationFail(userName);
-  }
-  
+    //conditional to pass this element as an argument in 'validation pass' or 'validation fail'
+    if(userNameIsValid ===true){
+      validationPass(userName);
+    } else {
+      validationFail(userName);
+    }
+    
   return userNameIsValid;
-}
+  }
 
 //helper function for Email Validation
 const emailValidator = () => {
@@ -141,13 +143,13 @@ const activityValidator = () =>{
   let activitiesBox= document.getElementById('activities-box');
   let activityIsValid = activitiesTotalCost > 0;
 
-  if (!activitiesTotalCost > 0) {
-    activitiesForm.className = 'activities not-valid';
-    activitiesForm.lastElementChild.style.display = 'block';
-  } else {
-    activitiesForm.className = 'activities valid';
-    activitiesForm.lastElementChild.style.display = 'none';
-  }
+    if (!activitiesTotalCost > 0) {
+      activitiesForm.className = 'activities not-valid';
+      activitiesForm.lastElementChild.style.display = 'block';
+    } else {
+      activitiesForm.className = 'activities valid';
+      activitiesForm.lastElementChild.style.display = 'none';
+    }
   return activityIsValid;
  }
 
@@ -156,12 +158,12 @@ const cardNumberValidator = () => {
   let cardNumberValue = cardNumber.value;
   let cardNumberIsValid = /^\b\d{13,16}\b$/.test(cardNumberValue);
 
-  //conditional to pass this element as an argument in 'validation pass' or 'validation fail'
-  if(cardNumberIsValid ===true){
-    validationPass(cardNumber);
-  } else {
-    validationFail(cardNumber);
-  }
+    //conditional to pass this element as an argument in 'validation pass' or 'validation fail'
+    if(cardNumberIsValid ===true){
+      validationPass(cardNumber);
+    } else {
+      validationFail(cardNumber);
+    }
   return cardNumberIsValid;
 }
 
@@ -170,13 +172,12 @@ const zipCodeValidator = () => {
   let zipCodeValue = zipCode.value;
   let zipCodeIsValid = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipCodeValue);
 
-  //conditional to pass this element as an argument in 'validation pass' or 'validation fail'
-  if(zipCodeIsValid ===true){
-    validationPass(zipCode);
-  } else {
-    validationFail(zipCode);
-  }
-
+    //conditional to pass this element as an argument in 'validation pass' or 'validation fail'
+    if(zipCodeIsValid ===true){
+      validationPass(zipCode);
+    } else {
+      validationFail(zipCode);
+    }
   return zipCodeIsValid;
 }
 
@@ -185,12 +186,12 @@ const cvvValidator = () => {
   let cvvValue = cvv.value;
   let cvvIsValid = /(^\d{3}$)/.test(cvvValue);
 
-  //conditional to pass this element as an argument in 'validation pass' or 'validation fail'
-  if(cvvIsValid ===true){
-    validationPass(cvv);
-  } else {
-    validationFail(cvv);
-  }
+    //conditional to pass this element as an argument in 'validation pass' or 'validation fail'
+    if(cvvIsValid ===true){
+      validationPass(cvv);
+    } else {
+      validationFail(cvv);
+    }
   return cvvIsValid;
 }
 
@@ -211,7 +212,7 @@ function validationFail(element){
   return validationFail;
 }
 
-//validates form after user returns
+//validates form as user types
 userName.addEventListener('keyup', nameValidator);
 userEmail.addEventListener('keyup', emailValidator);
 cardNumber.addEventListener('keyup', cardNumberValidator);
@@ -231,7 +232,7 @@ form.addEventListener('submit', (e) => {
   if(!activityValidator()){
     e.preventDefault();
   }
-  
+
   if (payingWith.value === 'credit-card'){
 
     if(!cardNumberValidator()){
